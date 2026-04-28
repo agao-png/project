@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Room {
+public class Room implements Interactable {
     private String name;
     private String description;
     private ArrayList<Item> items;
@@ -61,4 +61,17 @@ public class Room {
         result += "#============================================#";
      return result;
     }
+    
+    public void interact(Hero hero) {
+    visited = true;
+    System.out.println(this);
+    for (Item item : items) {
+        if (item instanceof Interactable) {
+            ((Interactable) item).interact(hero);
+        }
+    }
+    for (Monster monster : monsters) {
+        monster.attack(hero);
+    }
+}
 }

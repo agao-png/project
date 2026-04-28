@@ -1,4 +1,4 @@
-public class Item {
+public class Item implements Comparable<Item> {
     private String name;
     private String itemType;
     private int value;
@@ -24,7 +24,12 @@ public class Item {
     }
 
     public void setItemType(String itemType) {
-        this.itemType = itemType;
+    if (!itemType.equalsIgnoreCase("Weapon") && !itemType.equalsIgnoreCase("Potion") && !itemType.equalsIgnoreCase("Armor")) {
+        System.out.println("item type must be weapon, potion, or armor");
+        } 
+    else {
+        this.itemType = itemType.toUpperCase();
+        }
     }
 
     public int getValue() {
@@ -32,8 +37,13 @@ public class Item {
     }
 
     public void setValue(int value) {
+    if (value <= 0) {
+        System.out.println("value must > 0");
+        } 
+    else {
         this.value = value;
-    }
+         }
+     }   
 
     public String getDescription() {
         return description;
@@ -43,10 +53,14 @@ public class Item {
         this.description = description;
     }
 
+    public int compareTo(Item other) {
+        return Integer.compare(this.value, other.value);
+    }
+
     public String toString() {
-     String result = "";
+        String result = "";
         result += "[" + itemType + "]  " + name + "  (value: " + value + ")" + "\n";
         result += ">> " + description;
-     return result;
+        return result;
     }
 }

@@ -34,4 +34,12 @@ public class Monster extends Character {
         result += "+-----------------------------+";
      return result;
     }
+
+    public void attack(Character target) {
+    System.out.println(getName() + "snarls and strikes");
+    int damage = getAttackPower() - target.getDefense();
+        if (damage < 1) damage = 1;
+            target.setHealth(target.getHealth() - damage);
+            System.out.println(getName() + " attacks, " + damage + " damage");
+}
 }

@@ -15,15 +15,21 @@ public class Hero extends Character {
     }
 
     public void setLevel(int level) {
+    if (level < 1 || level > 99) {
+        System.out.println("level must be between 1 and 99");
+    } 
+    else {
         this.level = level;
-    }
-
-    public int getExperiencePoints() {
-        return experiencePoints;
+        }
     }
 
     public void setExperiencePoints(int experiencePoints) {
+    if (experiencePoints < 0) {
+        System.out.println("XP must be positive");
+    } 
+    else {
         this.experiencePoints = experiencePoints;
+        }
     }
 
     public String getHeroClass() {
@@ -35,7 +41,12 @@ public class Hero extends Character {
     }
 
     public void gainExperience(int xp) {
+    if (xp < 0) {
+        System.out.println("XP cannot be negative");
+    } 
+    else {
         experiencePoints = experiencePoints + xp;
+        }
     }
 
     public String toString() {
@@ -49,5 +60,12 @@ public class Hero extends Character {
             result += "| XP   : " + experiencePoints + "|\n";
             result += "+==============================================+";
         return result;
+    }
+
+    public void attack(Character target) {
+    int damage = getAttackPower() - target.getDefense();
+        if (damage < 1) damage = 1;
+            target.setHealth(target.getHealth() - damage);
+            System.out.println(getName() + " attacks, " + damage + " damage");
     }
 }

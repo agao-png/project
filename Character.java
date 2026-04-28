@@ -1,4 +1,4 @@
-public class Character {
+public abstract class Character {
     private String name;
     private int health;
     private int maxHealth;
@@ -25,16 +25,20 @@ public class Character {
         return health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
     public int getMaxHealth() {
         return maxHealth;
     }
 
-    public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
+    public void setHealth(int health) {
+    if (health < 0) {
+        System.out.println("Health cannot be negative");
+    } 
+    else if (health > maxHealth) {
+        System.out.println("Health cannot exceed max health");
+    } 
+    else {
+        this.health = health;
+        }
     }
 
     public int getAttackPower() {
@@ -42,7 +46,12 @@ public class Character {
     }
 
     public void setAttackPower(int attackPower) {
+    if (attackPower <= 0) {
+        System.out.println("Attack power must > 0");
+    } 
+    else {
         this.attackPower = attackPower;
+        }
     }
 
     public int getDefense() {
@@ -50,7 +59,12 @@ public class Character {
     }
 
     public void setDefense(int defense) {
+    if (defense < 0) {
+        System.out.println("Defense cannot be negative");
+    } 
+    else {
         this.defense = defense;
+        }
     }
 
     public static String healthBar(int current, int max) {
@@ -73,4 +87,7 @@ public class Character {
             result += "+==============================================+";
         return result; 
     }
+
+    public abstract void attack(Character target);
+
 }
