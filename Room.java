@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Room implements Interactable {
     private String name;
@@ -7,12 +9,33 @@ public class Room implements Interactable {
     private ArrayList<Monster> monsters;
     private boolean visited;
 
+    // Queue because FIFO
+    private Queue<Monster> spawnQueue = new LinkedList<>();
+
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
         this.items = new ArrayList<Item>();
         this.monsters = new ArrayList<Monster>();
         this.visited = false;
+    }
+
+    public void loadMonsters() {
+        for (Monster monster : monsters) {
+            spawnQueue.add(monster);
+        }
+    }
+
+    public Monster spawnNextMonster() {
+        return spawnQueue.poll();
+    }
+
+    public String getName() {
+        return name;
+    }
+    
+    public boolean hasMonsters() {
+        return !spawnQueue.isEmpty();
     }
 
     public void addItem(Item item) {

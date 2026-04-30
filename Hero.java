@@ -2,6 +2,7 @@ public class Hero extends Character {
     private int level;
     private int experiencePoints;
     private String heroClass;
+    private Inventory<Item> inventory = new Inventory<>();
 
     public Hero(String name, int health, int maxHealth, int attackPower, int defense, int level, int experiencePoints, String heroClass) {
         super(name, health, maxHealth, attackPower, defense);
@@ -58,6 +59,7 @@ public class Hero extends Character {
             result += "| HP   : " + bar + "  " + getHealth() + "/" + getMaxHealth() + "|\n";
             result += "| ATK  : " + getAttackPower() + "      DEF  : " + getDefense() + "|\n";
             result += "| XP   : " + experiencePoints + "|\n";
+            result += "| BAG  : " + inventory.getSize() + "items|\n";
             result += "+==============================================+";
         return result;
     }
@@ -67,5 +69,9 @@ public class Hero extends Character {
         if (damage < 1) damage = 1;
             target.setHealth(target.getHealth() - damage);
             System.out.println(getName() + " attacks, " + damage + " damage");
+    }
+
+    public Inventory<Item> getInventory() {
+        return inventory;
     }
 }
